@@ -1,7 +1,11 @@
 package Services;
 
+import org.data.repositories.ArtisanRepository;
+import org.data.repositories.BookingRepository;
+import org.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.utils.BookingMapper;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -10,7 +14,7 @@ public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
 
     @Autowired
-    private ArtisianRepository artisianRepository;
+    private ArtisanRepository artisianRepository;
 
     @Autowired
     private BookingMapper bookingMapper;
