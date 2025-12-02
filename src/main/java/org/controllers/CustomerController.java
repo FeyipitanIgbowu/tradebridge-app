@@ -1,3 +1,9 @@
+package org.controllers;
+
+import org.data.model.ServiceType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
