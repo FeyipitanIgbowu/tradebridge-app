@@ -1,16 +1,13 @@
-package org.data.model;
+package org.dtos.request;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
-public class Customer {
+public class RegisterCustomerRequest {
 
-    @Id
-    private String id;
     private String fullName;
     private String email;
     private String password;
     private String contact;
-}
 
+}

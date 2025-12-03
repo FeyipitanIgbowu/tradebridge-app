@@ -1,30 +1,39 @@
 package org.utils;
 
+import org.data.model.Booking;
+import org.data.model.PaymentStatus;
+import org.data.model.Status;
+import org.dtos.request.BookingArtisanRequest;
 import org.dtos.response.BookingArtisanResponse;
 import org.springframework.stereotype.Component;
-import dto.BookingRequest;
-import dto.BookingResponse;
-import entity.Booking;
+
+
 
 @Component
 public class MapperBooking {
 
-    public Booking map(BookingRequest request) {
+    public static Booking map(BookingArtisanRequest request) {
         Booking booking = new Booking();
-        booking.setCustomerId(request.getCustomerId());
-        booking.setArtisanId(request.getArtisanId());
+
+        booking.setCustomer(request.getCustomer());
         booking.setServiceType(request.getServiceType());
-        booking.setBookingTime(request.getBookingTime());
+        booking.setLocation(request.getLocation());
+        booking.setStatus(Status.PENDING);
+        booking.setPaymentStatus(PaymentStatus.Pending);
         return booking;
     }
 
-    public BookingResponse map(Booking booking, String customerName, String artisanName) {
-        BookingResponse response = new BookingResponse();
+    public static BookingArtisanResponse map(Booking booking) {
+        BookingArtisanResponse response = new BookingArtisanResponse();
+
         response.setId(booking.getId());
-        response.setCustomerName(customerName);
-        response.setArtisanName(artisanName);
-        response.setStatus(booking.getStatus());
-        response.setPayment(request.payment());
+        response.setArtisanName(booking.getArtisan().getFullName());
+        response.setCustomerName(booking.getCustomer().getFullName());
+        response.setServiceType(booking.getServiceType());
+        response.setPaymentStatus(booking.getPaymentStatus());
+        if (response.getPaymentStatus() == PaymentStatus.Confirmed) {
+            response.setStatus(Status.CONFIRMED);
+        }
         return response;
     }
 }
