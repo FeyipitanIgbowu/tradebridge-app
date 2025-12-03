@@ -1,9 +1,9 @@
 package org.dtos.request;
 
 import lombok.Data;
-import org.data.model.*;
-import org.springframework.data.annotation.Id;
+import org.data.model.ServiceType;
 
+import java.time.LocalDateTime;
 
 @Data
 public class BookingArtisanRequest {
