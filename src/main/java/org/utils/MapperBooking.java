@@ -7,7 +7,7 @@ import dto.BookingResponse;
 import entity.Booking;
 
 @Component
-public class BookingMapper {
+public class MapperBooking {
 
     public Booking map(BookingRequest request) {
         Booking booking = new Booking();
