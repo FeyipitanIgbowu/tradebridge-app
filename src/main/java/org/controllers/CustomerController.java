@@ -1,15 +1,17 @@
 package org.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.data.model.ServiceType;
+import org.services.CustomerServices;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerServices customerService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerServices customerService) {
         this.customerService = customerService;
     }
 

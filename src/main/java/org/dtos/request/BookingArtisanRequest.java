@@ -1,7 +1,12 @@
 package org.dtos.request;
 
 import lombok.Data;
+import org.data.model.Artisan;
+import org.data.model.Customer;
 import org.data.model.ServiceType;
+import org.data.model.Status;
+import org.example.tradeBridge.data.models.PaymentStatus;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 

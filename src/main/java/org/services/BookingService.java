@@ -12,6 +12,4 @@ public interface BookingService {
     BookingArtisanResponse bookArtisan(BookingArtisanRequest request);
 
     CancelBookingResponse cancelBooking(CancelBookingRequest request);
-
-//    PayArtisanResponse payArtisan(PayArtisanRequest request);
 }

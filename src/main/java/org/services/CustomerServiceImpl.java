@@ -1,16 +1,9 @@
 package org.services;
 
-import org.data.model.Booking;
 import org.data.model.Customer;
-import org.data.model.Status;
-import org.data.repositories.BookingRepository;
 import org.data.repositories.CustomerRepository;
-import org.dtos.request.BookingArtisanRequest;
-import org.dtos.request.CancelBookingRequest;
 import org.dtos.request.CustomerLoginRequest;
 import org.dtos.request.RegisterCustomerRequest;
-import org.dtos.response.BookingArtisanResponse;
-import org.dtos.response.CancelBookingResponse;
 import org.dtos.response.CustomerLoginResponse;
 import org.dtos.response.RegisterCustomerResponse;
 import org.exceptions.CustomerAlreadyExist;
@@ -19,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-
-import static org.utils.BookingMapper.map;
 import static org.utils.CustomerMapper.mapRegisterCustomer;
 import static org.utils.CustomerMapper.mapRegisterCustomerResponse;
 
@@ -30,8 +21,6 @@ public class CustomerServiceImpl implements CustomerServices {
     private CustomerRepository customerRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private BookingRepository bookingRepository;
 
     @Override
     public RegisterCustomerResponse registerCustomer(RegisterCustomerRequest request) {
@@ -59,34 +48,6 @@ public class CustomerServiceImpl implements CustomerServices {
 
         return new CustomerLoginResponse("Login Successful");
 
-    }
-
-    @Override
-    public BookingArtisanResponse bookArtisan(BookingArtisanRequest request) {
-        if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
-            throw new IllegalArgumentException("Customer not found");
-
-        Booking booking = map(request);
-        bookingRepository.save(booking);
-
-        return map(booking);
-    }
-
-
-    @Override
-    public CancelBookingResponse cancelBooking(CancelBookingRequest request) {
-
-        Optional<Booking> booking = bookingRepository.findById(request.getBookingId());
-        if (booking.isEmpty()) throw new IllegalArgumentException("Booking not found");
-
-        booking.get().setStatus(Status.CANCELLED);
-        bookingRepository.save(booking.get());
-
-        CancelBookingResponse response = new CancelBookingResponse();
-        response.setBookingId(booking.get().getId());
-        response.setStatus(booking.get().getStatus());
-
-        return response;
     }
 
 }
