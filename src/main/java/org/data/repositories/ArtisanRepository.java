@@ -14,5 +14,4 @@ public interface ArtisanRepository extends MongoRepository<Artisan, String> {
 
     List<Artisan> findBySpecializationAndIsAvailableTrue(ServiceType specialization);
 
-    Optional<Artisan> findByUserName(String userName);
 }

@@ -1,11 +1,23 @@
-package Services;
+package org.services;
 
+import org.data.model.*;
 import org.data.repositories.ArtisanRepository;
 import org.data.repositories.BookingRepository;
+import org.data.repositories.CustomerRepository;
+import org.dtos.request.BookingArtisanRequest;
+import org.dtos.request.CancelBookingRequest;
+import org.dtos.request.PayArtisanRequest;
+import org.dtos.response.BookingArtisanResponse;
+import org.dtos.response.CancelBookingResponse;
+import org.dtos.response.PayArtisanResponse;
 import org.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.utils.BookingMapper;
+
+import java.util.Optional;
+
+import static org.utils.BookingMapper.map;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -17,72 +29,54 @@ public class BookingServiceImpl implements BookingService {
     private ArtisanRepository artisianRepository;
 
     @Autowired
-    private BookingMapper bookingMapper;
-
-    @Autowired
-    private CustomerService customerService;
+    private CustomerRepository customerRepository;
 
 
     @Override
-    public BookArtisanResponse bookArtisan(BookArtisanRequest request) {
-        artisianRepository.findById(request.getArtisanId())
-                .orElseThrow(() -> new IllegalArgumentException("Artisan not found"));
+    public BookingArtisanResponse bookArtisan(BookingArtisanRequest request) {
 
-        customerService.findCustomerById(request.getCustomerId());
+        if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
+            throw new IllegalArgumentException("Customer not found");
 
-        Booking booking = new Booking(
-                request.getCustomerId(),
-                request.getArtisanId(),
-                request.getAmount()
-        );
-
-        booking.setStatus(BookingStatus.CONFIRMED);
-
+        Booking booking = map(request);
         bookingRepository.save(booking);
 
-        BookArtisanResponse response = new BookArtisanResponse();
-        response.setBookingId(booking.getId());
-        response.setCustomerId(booking.getCustomerId());
-        response.setArtisanId(booking.getArtisanId());
-        response.setAmount(booking.getAmount());
-        response.setStatus(booking.getStatus());
-
-        return response;
+        return map(booking);
     }
 
 
     @Override
     public CancelBookingResponse cancelBooking(CancelBookingRequest request) {
 
-        Booking booking = bookingRepository.findById(request.getBookingId())
-                .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
+        Optional<Booking> booking = bookingRepository.findById(request.getBookingId());
+        if (booking.isEmpty()) throw new IllegalArgumentException("Booking not found");
 
-        booking.setStatus(BookingStatus.CANCELLED);
-        bookingRepository.save(booking);
+        booking.get().setStatus(Status.CANCELLED);
+        bookingRepository.save(booking.get());
 
         CancelBookingResponse response = new CancelBookingResponse();
-        response.setBookingId(booking.getId());
-        response.setStatus(booking.getStatus());
+        response.setBookingId(booking.get().getId());
+        response.setStatus(booking.get().getStatus());
 
         return response;
     }
-
-
-    @Override
-    public PayArtisanResponse payArtisan(PayArtisanRequest request) {
-
-        Booking booking = bookingRepository.findById(request.getBookingId())
-                .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
-
-        if (booking.getStatus() != BookingStatus.COMPLETED) {
-            throw new IllegalArgumentException("Booking must be COMPLETED before paying artisan");
-        }
-
-        return new PayArtisanResponse(
-                booking.getId(),
-                booking.getArtisanId(),
-                booking.getAmount(),
-                "Payment successful"
-        );
-    }
 }
+
+//    @Override
+//    public PayArtisanResponse payArtisan(PayArtisanRequest request) {
+//
+//        Booking booking = bookingRepository.findById(request.getBookingId())
+//                .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
+//
+//        if (booking.getStatus() != Status.COMPLETED) {
+//            throw new IllegalArgumentException("Booking must be COMPLETED before paying artisan");
+//        }
+//
+//        return new PayArtisanResponse(
+//                booking.getId(),
+//                booking.getArtisanId(),
+//                booking.getAmount(),
+//                "Payment successful"
+//        );
+//    }
+//}
