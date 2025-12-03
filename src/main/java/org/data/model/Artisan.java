@@ -12,7 +12,7 @@ public class Artisan {
     private String email;
     private String phoneNumber;
     private String address;
-    private ServiceType specialization;
+    private ServiceType serviceType;
     private String password;
     private boolean isAvailable;
 }
