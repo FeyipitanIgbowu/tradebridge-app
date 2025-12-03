@@ -1,13 +1,12 @@
 package org.utils;
 
-import org.dtos.response.BookingArtisanResponse;
 import org.springframework.stereotype.Component;
 import dto.BookingRequest;
 import dto.BookingResponse;
 import entity.Booking;
 
 @Component
-public class BookingMapper {
+public class MapperBooking {
 
     public Booking map(BookingRequest request) {
         Booking booking = new Booking();
