@@ -3,7 +3,7 @@ package org.dtos.request;
 import lombok.Data;
 
 @Data
-public class ArtisanLoginRequest {
-    private String password;
+public class CustomerLoginRequest {
     private String email;
+    private String password;
 }
