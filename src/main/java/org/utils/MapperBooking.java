@@ -7,6 +7,7 @@ import org.dtos.request.BookingArtisanRequest;
 import org.dtos.response.BookingArtisanResponse;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 
 
 @Component
@@ -16,11 +17,10 @@ public class MapperBooking {
     public static Booking map(BookingArtisanRequest request) {
         Booking booking = new Booking();
 
-        booking.setCustomer(request.getCustomer());
-        booking.setServiceType(request.getServiceType());
-        booking.setLocation(request.getLocation());
-        booking.setStatus(Status.PENDING);
-        booking.setPaymentStatus(PaymentStatus.Pending);
+        booking.setCustomerId(request.getCustomer().getId());
+        booking.setArtisanId(request.getArtisan());
+        booking.setScheduledDate(LocalDateTime.now());
+        booking.setBookingStatus(Status.PENDING);
         return booking;
     }
 

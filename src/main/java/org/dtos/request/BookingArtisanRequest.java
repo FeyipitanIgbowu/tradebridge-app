@@ -1,7 +1,8 @@
 package org.dtos.request;
 
 import lombok.Data;
-import org.data.model.ServiceType;
+import org.data.model.*;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
