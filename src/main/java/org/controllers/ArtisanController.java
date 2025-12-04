@@ -48,5 +48,4 @@ public class ArtisanController {
             return new ResponseEntity<>(new APIResponse(false, ex.getMessage()),HttpStatus.BAD_REQUEST);
         }
     }
-    Pay
 }

@@ -2,8 +2,8 @@ package org.utils;
 
 import org.dtos.response.BookingArtisanResponse;
 import org.springframework.stereotype.Component;
-import dto.BookingRequest;
-import dto.BookingResponse;
+import dtos.BookingRequest;
+import dtos.BookingResponse;
 import entity.Booking;
 
 @Component
