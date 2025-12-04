@@ -11,11 +11,25 @@ import java.time.LocalTime;
 @ToString
 public class Booking {
     @Id
-    String id;
-    String customerId;
-    Artisan artisanId;
-    Status bookingStatus;
-    double price;
-    LocalDateTime scheduledDate;
+    private String id;
+
+
+    private Customer customer;
+    private Artisan artisan;
+    private LocalTime bookingTime = LocalTime.now();
+    private LocalDate bookedDate =  LocalDate.now();
+    private Status status;
+    private PaymentStatus paymentStatus;
+    private String location;
+    private ServiceType price;
+    private ServiceType serviceType;
 }
+
+
+
+
+
+
+
+
 

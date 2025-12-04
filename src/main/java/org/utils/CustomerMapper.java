@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class CustomerMapper {
 
     public static Customer mapRegisterCustomer(RegisterCustomerRequest request) {
+
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         Customer customer = new Customer();
@@ -21,6 +22,7 @@ public class CustomerMapper {
 
         return customer;
     }
+
 
         public static RegisterCustomerResponse mapRegisterCustomerResponse(Customer customer){
         RegisterCustomerResponse response = new RegisterCustomerResponse();

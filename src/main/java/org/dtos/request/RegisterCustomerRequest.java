@@ -10,4 +10,5 @@ public class RegisterCustomerRequest {
     private String password;
     private String contact;
 
+
 }

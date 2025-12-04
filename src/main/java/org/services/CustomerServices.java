@@ -7,6 +7,7 @@ import org.dtos.response.RegisterCustomerResponse;
 
 public interface CustomerServices{
 
+
     RegisterCustomerResponse registerCustomer(RegisterCustomerRequest request);
     CustomerLoginResponse loginCustomer(CustomerLoginRequest request);
 }

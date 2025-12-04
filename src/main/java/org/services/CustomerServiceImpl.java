@@ -50,4 +50,33 @@ public class CustomerServiceImpl implements CustomerServices {
 
     }
 
+    @Override
+    public BookingArtisanResponse bookArtisan(BookingArtisanRequest request) {
+
+        if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
+            throw new IllegalArgumentException("Customer not found");
+
+        Booking booking = map(request);
+        bookingRepository.save(booking);
+
+        return map(booking);
+    }
+
+
+    @Override
+    public CancelBookingResponse cancelBooking(CancelBookingRequest request) {
+
+        Optional<Booking> booking = bookingRepository.findById(request.getBookingId());
+        if (booking.isEmpty()) throw new IllegalArgumentException("Booking not found");
+
+        booking.get().setStatus(Status.CANCELLED);
+        bookingRepository.save(booking.get());
+
+        CancelBookingResponse response = new CancelBookingResponse();
+        response.setBookingId(booking.get().getId());
+        response.setStatus(booking.get().getStatus());
+
+        return response;
+    }
+
 }
