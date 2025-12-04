@@ -4,8 +4,6 @@ import lombok.Data;
 import org.data.model.*;
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDateTime;
-
 @Data
 public class BookingArtisanRequest {
     @Id

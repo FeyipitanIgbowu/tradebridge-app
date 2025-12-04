@@ -1,10 +1,8 @@
 package org.data.model;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -12,7 +10,6 @@ import java.time.LocalTime;
 public class Booking {
     @Id
     private String id;
-
 
     private Customer customer;
     private Artisan artisan;
@@ -23,6 +20,26 @@ public class Booking {
     private String location;
     private ServiceType price;
     private ServiceType serviceType;
+
+    public String getArtisanId() {
+        return artisan != null ? artisan.getId() : null;
+    }
+
+    public String getCustomerId() {
+        return customer != null ? customer.getId() : null;
+    }
+
+    public void setBookingStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getBookingStatus() {
+        return this.status;
+    }
+
+    public LocalDate getScheduledDate() {
+        return this.bookedDate;
+    }
 }
 
 

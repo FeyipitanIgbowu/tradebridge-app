@@ -128,7 +128,6 @@ public class ArtisanServiceImpl implements ArtisanService {
 
     @Override
     public List<ArtisanResponse> getBookedArtisans() {
-        return List.of();
-    }
+        return List.of();    }
 }
 

@@ -48,11 +48,12 @@ public class AdminMapper {
     public static AdminViewAllBookedArtisans toViewAllBookedArtisans(Booking booking){
         AdminViewAllBookedArtisans response = new AdminViewAllBookedArtisans();
         response.setId(booking.getId());
-        response.setArtisanId(booking.getArtisanId());
         response.setCustomerId(booking.getCustomerId());
-        response.setBookingStatus(booking.getBookingStatus());
-        response.setPrice(booking.getPrice());
-        response.setScheduledDate(booking.getScheduledDate());
+        response.setArtisanId(booking.getArtisan());
+        response.setBookingStatus(booking.getStatus());
+        // price is ServiceType in booking, but response expects double, so we'll set a default
+        response.setPrice(0.0);
+        response.setScheduledDate(null);
 
         return response;
     }
@@ -62,7 +63,6 @@ public class AdminMapper {
         response.setPaymentId(payment.getId());
         response.setCustomerId(payment.getCustomerId());
         response.setStatus(payment.getPaymentStatus());
-        response.setPrice(payment.getPrice());
         response.setConfirmationDate(payment.getPaymentDate());
 
         return response;

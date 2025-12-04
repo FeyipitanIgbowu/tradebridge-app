@@ -2,10 +2,7 @@ package org.controllers;
 
 import org.dtos.request.ArtisanLoginRequest;
 import org.dtos.request.ArtisanSignUpRequest;
-import org.dtos.request.ArtisanUpdateRequest;
 import org.dtos.response.APIResponse;
-import org.dtos.response.ArtisanLoginResponse;
-import org.dtos.response.ArtisanSignUpResponse;
 import org.exceptions.TradeBridgeAppException;
 import org.services.ArtisanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class ArtisanController {
 
+    @Autowired
     private ArtisanService artisanService;
 
     @PostMapping("/artisan/register")
@@ -48,5 +48,4 @@ public class ArtisanController {
             return new ResponseEntity<>(new APIResponse(false, ex.getMessage()),HttpStatus.BAD_REQUEST);
         }
     }
-    Pay
 }
