@@ -20,6 +20,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(request));
     }
 
+
     @GetMapping("/search")
     public ResponseEntity<?> searchService(@RequestParam ServiceType type) {
         return ResponseEntity.ok(customerService.searchService(type));

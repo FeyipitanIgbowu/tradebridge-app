@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class BookingArtisanRequest {
     @Id
+
     private String id;
     private Customer customer;
     private Artisan artisan;

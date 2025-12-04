@@ -63,6 +63,7 @@ public class CustomerServiceImpl implements CustomerServices {
 
     @Override
     public BookingArtisanResponse bookArtisan(BookingArtisanRequest request) {
+
         if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
             throw new IllegalArgumentException("Customer not found");
 

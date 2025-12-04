@@ -7,6 +7,7 @@ import org.dtos.response.RegisterCustomerResponse;
 
 public interface CustomerServices extends BookingService{
 
+
     RegisterCustomerResponse registerCustomer(RegisterCustomerRequest request);
     CustomerLoginResponse loginCustomer(CustomerLoginRequest request);
 }

@@ -11,6 +11,8 @@ public class Booking {
 
     @Id
     private String id;
+
+
     private Customer customer;
     private Artisan artisan;
     private LocalTime bookingTime = LocalTime.now();
@@ -21,4 +23,12 @@ public class Booking {
     private ServiceType price;
     private ServiceType serviceType;
 }
+
+
+
+
+
+
+
+
 

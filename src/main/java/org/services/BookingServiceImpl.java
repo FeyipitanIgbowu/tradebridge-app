@@ -31,9 +31,9 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private CustomerRepository customerRepository;
 
-
     @Override
     public BookingArtisanResponse bookArtisan(BookingArtisanRequest request) {
+
 
         if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
             throw new IllegalArgumentException("Customer not found");

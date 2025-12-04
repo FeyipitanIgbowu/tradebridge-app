@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MapperBooking {
 
+
     public static Booking map(BookingArtisanRequest request) {
         Booking booking = new Booking();
 
