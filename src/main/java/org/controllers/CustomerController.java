@@ -1,6 +1,9 @@
 package org.controllers;
 
-import org.data.model.ServiceType;
+import org.dtos.request.CustomerLoginRequest;
+import org.dtos.request.RegisterCustomerRequest;
+import org.dtos.response.CustomerLoginResponse;
+import org.dtos.response.RegisterCustomerResponse;
 import org.services.CustomerServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +19,16 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<CustomerResponse> register(
-            @RequestBody CustomerRequest request
+    public ResponseEntity<RegisterCustomerResponse> register(
+            @RequestBody RegisterCustomerRequest request
     ) {
-        return ResponseEntity.ok(customerService.createCustomer(request));
+        return ResponseEntity.ok(customerService.registerCustomer(request));
     }
 
-
-    @GetMapping("/search")
-    public ResponseEntity<?> searchService(@RequestParam ServiceType type) {
-        return ResponseEntity.ok(customerService.searchService(type));
+    @PostMapping("/login")
+    public ResponseEntity<CustomerLoginResponse> login(
+            @RequestBody CustomerLoginRequest request
+    ) {
+        return ResponseEntity.ok(customerService.loginCustomer(request));
     }
 }

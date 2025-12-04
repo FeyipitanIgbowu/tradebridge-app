@@ -9,14 +9,14 @@ import org.dtos.response.BookingArtisanResponse;
 import org.dtos.response.CancelBookingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.utils.MapperBooking;
 import java.util.Optional;
-import static org.utils.MapperBooking.map;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
-    private BookingRepository bokingRepository;
+    private BookingRepository bookingRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -28,10 +28,10 @@ public class BookingServiceImpl implements BookingService {
         if (customerRepository.findById(request.getCustomer().getId()).isEmpty())
             throw new IllegalArgumentException("Customer not found");
 
-        Booking booking = map(request);
+        Booking booking = MapperBooking.map(request);
         bookingRepository.save(booking);
 
-        return map(booking);
+        return MapperBooking.map(booking);
     }
 
 

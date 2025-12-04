@@ -118,7 +118,7 @@ public class AdminServiceImpl implements AdminService{
         payment.setPaymentDate(LocalDateTime.now());
         paymentRepository.save(payment);
 
-        booking.setBookingStatus(Status.CONFIRMED);
+        booking.setStatus(Status.CONFIRMED);
         bookingRepository.save(booking);
 
         return AdminMapper.toAdminConfirmPaymentResponse(payment);

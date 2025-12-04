@@ -1,30 +1,31 @@
 package org.utils;
 
+import org.data.model.Booking;
+import org.dtos.request.BookingArtisanRequest;
 import org.dtos.response.BookingArtisanResponse;
 import org.springframework.stereotype.Component;
-import dtos.BookingRequest;
-import dtos.BookingResponse;
-import entity.Booking;
 
 @Component
 public class MapperBooking {
 
-    public Booking map(BookingRequest request) {
+    public static Booking map(BookingArtisanRequest request) {
         Booking booking = new Booking();
-        booking.setCustomerId(request.getCustomerId());
-        booking.setArtisanId(request.getArtisanId());
+        booking.setCustomer(request.getCustomer());
+        booking.setArtisan(request.getArtisan());
         booking.setServiceType(request.getServiceType());
-        booking.setBookingTime(request.getBookingTime());
+        booking.setLocation(request.getLocation());
+        booking.setPaymentStatus(request.getPaymentStatus());
         return booking;
     }
 
-    public BookingResponse map(Booking booking, String customerName, String artisanName) {
-        BookingResponse response = new BookingResponse();
+    public static BookingArtisanResponse map(Booking booking) {
+        BookingArtisanResponse response = new BookingArtisanResponse();
         response.setId(booking.getId());
-        response.setCustomerName(customerName);
-        response.setArtisanName(artisanName);
+        response.setCustomerName(booking.getCustomer() != null ? booking.getCustomer().getFullName() : "");
+        response.setArtisanName(booking.getArtisan() != null ? booking.getArtisan().getFullName() : "");
         response.setStatus(booking.getStatus());
-        response.setPayment(request.payment());
+        response.setServiceType(booking.getServiceType());
+        response.setPaymentStatus(booking.getPaymentStatus());
         return response;
     }
 }
