@@ -1,4 +1,4 @@
 package org.dtos.response;
 
-public class PayArtisanResponse {
+public class  PayArtisanResponse {
 }

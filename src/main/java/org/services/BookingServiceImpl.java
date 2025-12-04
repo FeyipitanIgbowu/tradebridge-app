@@ -16,7 +16,7 @@ import static org.utils.MapperBooking.map;
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
-    private BookingRepository bookingRepository;
+    private BookingRepository bokingRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
